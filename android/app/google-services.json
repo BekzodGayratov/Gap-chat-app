@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "37370662480",
+    "project_id": "chatapp-3d5f6",
+    "storage_bucket": "chatapp-3d5f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37370662480:android:cd85ef47df39b872480b55",
+        "android_client_info": {
+          "package_name": "com.bekzod.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37370662480-khvb0qarj65gjp8t2oieq6qnt5mj1uul.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bekzod.chatapp",
+            "certificate_hash": "249869e29faafc3a23aa577894fa871c28ba49ba"
+          }
+        },
+        {
+          "client_id": "37370662480-irpdi4v2h8gb911j7gjbspvldohe30cg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9-Bx9WpevMcuJCtlq-ByCRwBpnpXnL5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "37370662480-irpdi4v2h8gb911j7gjbspvldohe30cg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
