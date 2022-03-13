@@ -1,0 +1,1 @@
+ List<String> numbers = ["+998", "+1", "+7"];

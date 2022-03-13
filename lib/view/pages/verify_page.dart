@@ -1,7 +1,4 @@
 // ignore_for_file: must_be_immutable
-
-import 'dart:math';
-
 import 'package:chatapp/services/fireStore_service.dart';
 import 'package:chatapp/services/firebase_auth_service.dart';
 import 'package:chatapp/view/pages/sign_up_page.dart';

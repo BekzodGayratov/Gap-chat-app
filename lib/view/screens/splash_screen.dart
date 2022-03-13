@@ -1,6 +1,7 @@
 import 'package:chatapp/services/firebase_auth_service.dart';
 import 'package:chatapp/view/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -12,14 +13,18 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2)).then((value) {
+    Future.delayed(const Duration(seconds: 3)).then((value) {
       ok();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: SvgPicture.asset("assets/gap.svg",color: Colors.amber,),
+      ),
+    );
   }
 
   void ok() {
