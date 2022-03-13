@@ -1,25 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FireStoreService {
+  List<Map<String, dynamic>> usersProfilePic = [];
   static final fireStore = FirebaseFirestore.instance;
   static DocumentSnapshot<Map<String, dynamic>>? private;
 
   static readValue({required String collection}) async {
     try {
-      await readData();
       await fireStore.collection(collection).doc().get().then((value) {});
       return true;
     } catch (e) {
-      print(Exception(e));
       return false;
     }
   }
 
-  static readData() async {
-    CollectionReference<Map<String, dynamic>> collection =
-        fireStore.collection("private");
-    await collection.doc("friends").get().then((value) {
-      private = (value);
-    });
+  static removeField(int indexAt, String path, String id) async {
+    await fireStore.doc("users/$path/message/$id").delete();
+  }
+
+  static removeData(String id) async {
+    await fireStore.doc("group/$id").delete();
   }
 }

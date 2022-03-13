@@ -44,7 +44,7 @@ class VerifyPage extends StatelessWidget {
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.055,
                 child: ElevatedButton(
-                  child: const Text("Sign Up"),
+                  child: const Text("Tasdiqlashv"),
                   onPressed: () async {
                     await FirebaseAuthService.verifyOTP(_sentCodeController.text)
                         .then((value) {

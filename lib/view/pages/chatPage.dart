@@ -3,8 +3,8 @@ import 'package:chatapp/widgets/chat_page_widgets.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {
-  final List data;
-  const ChatPage({Key? key, required this.data}) : super(key: key);
+  final List? data;
+  const ChatPage({Key? key, this.data}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +14,7 @@ class ChatPage extends StatelessWidget {
             InkWell(
               splashColor: Colors.transparent,
               child: CircleAvatar(
-                backgroundImage: NetworkImage(data[2]),
+                backgroundImage: NetworkImage(data![2]),
                 radius: 24.0,
               ),
               onTap: () {},
@@ -22,14 +22,14 @@ class ChatPage extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.02,
             ),
-            Text(data[0].toString()),
+            Text(data![0].toString()),
           ],
         ),
       ),
       body: FadeInUp(
         child: ChatPageWidget(
-          indexAt: data[0],
-          path: data[1],
+          indexAt: data![0],
+          path: data![1],
         ),
       ),
     );

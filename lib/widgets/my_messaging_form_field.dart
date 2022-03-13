@@ -17,7 +17,7 @@ class MyMessagingFormField extends StatelessWidget {
     return TextFormField(
       controller: messagingController,
       decoration: InputDecoration(
-          hintText: "Type a message here ...",
+          hintText: "Xabar yozing...",
           suffixIcon: context.watch<MessagingProvider>().isComplete
               ? IconButton(
                   icon: const Icon(Icons.send),

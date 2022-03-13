@@ -1,7 +1,5 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:chatapp/core/components/tab_bar_comp.dart';
-import 'package:chatapp/services/fireStore_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:chatapp/view/screens/chats_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,9 +10,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomePageState extends State<HomeScreen> with TickerProviderStateMixin {
   late TabController _tabController;
-  int _selectedIndex = 1;
-  CollectionReference privateUsers =
-      FirebaseFirestore.instance.collection("users");
+  List<Widget> _pages = [ChatsScreen()];
   int? length;
   @override
   void initState() {
@@ -28,7 +24,7 @@ class _HomePageState extends State<HomeScreen> with TickerProviderStateMixin {
       appBar: AppBar(
         toolbarHeight: MediaQuery.of(context).size.height * 0.04,
         title: const Text(
-          "All users",
+          "Gap",
         ),
         bottom: TabBar(
           controller: _tabController,
@@ -38,71 +34,17 @@ class _HomePageState extends State<HomeScreen> with TickerProviderStateMixin {
           }),
         ),
       ),
-      body: FutureBuilder<QuerySnapshot>(
-        future: privateUsers.get(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
-          } else if (snapshot.hasError) {
-            return const Center(
-              child: Text("ERROR"),
-            );
-          } else {
-            return Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                      itemBuilder: (conte, index) {
-                        QuerySnapshot<Map<String, dynamic>> data;
-                        FireStoreService.fireStore
-                            .collection(
-                                "users/${snapshot.data!.docs[index].id}/message")
-                            .get()
-                            .then((value) {
-                          data = value;
-                        });
-                        return FadeInUp(
-                          child: InkWell(
-                            child: Card(
-                              child: InkWell(
-                                child: ListTile(
-                                  leading: CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        (snapshot.data!.docs[index].data()
-                                            as Map)["profilePic"]),
-                                    radius: 25.0,
-                                  ),
-                                  title: Text((snapshot.data!.docs[index].data()
-                                          as Map)["displayName"]
-                                      .toString()),
-                                  subtitle: Text(""),
-                                ),
-                                onTap: () {
-                                  Navigator.pushNamed(context, '/chatPage',
-                                      arguments: [
-                                        (snapshot.data!.docs[index].data()
-                                                as Map)["displayName"]
-                                            .toString(),
-                                        snapshot.data!.docs[index].id
-                                            .toString(),
-                                        (snapshot.data!.docs[index].data()
-                                                as Map)["profilePic"]
-                                            .toString(),
-                                      ]);
-                                },
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      itemCount: snapshot.data!.docs.length),
-                )
-              ],
-            );
-          }
-        },
+      body: _pages[0],
+      bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.black,
+        currentIndex: 0,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: ""),
+        ],
       ),
     );
   }
