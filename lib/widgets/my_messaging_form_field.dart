@@ -27,9 +27,7 @@ class MyMessagingFormField extends StatelessWidget {
                         .collection("message")
                         .doc()
                         .set({
-                      "from":
-                          FirebaseAuthService.auth.currentUser!.phoneNumber ??
-                              FirebaseAuthService.auth.currentUser!.phoneNumber,
+                      "from": FirebaseAuthService.auth.currentUser!.displayName.toString(),
                       "message": messagingController.text,
                       "created_at": FieldValue.serverTimestamp(),
                     });

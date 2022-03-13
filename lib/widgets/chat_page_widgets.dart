@@ -45,7 +45,7 @@ class ChatPageWidget extends StatelessWidget {
                       return Row(
                         mainAxisAlignment: data[__]["from"] ==
                                 FirebaseAuthService
-                                    .auth.currentUser!.phoneNumber
+                                    .auth.currentUser!.displayName
                             ? MainAxisAlignment.end
                             : MainAxisAlignment.start,
                         children: [
@@ -73,6 +73,4 @@ class ChatPageWidget extends StatelessWidget {
       },
     );
   }
-
-  
 }

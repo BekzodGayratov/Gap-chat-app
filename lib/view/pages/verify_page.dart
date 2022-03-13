@@ -9,10 +9,7 @@ import 'package:flutter/material.dart';
 
 class VerifyPage extends StatelessWidget {
   String disName;
-  VerifyPage({
-    Key? key,
-    required this.disName
-  }) : super(key: key);
+  VerifyPage({Key? key, required this.disName}) : super(key: key);
 
   final _sentCodeController = TextEditingController();
   List? users;
@@ -44,16 +41,18 @@ class VerifyPage extends StatelessWidget {
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.055,
                 child: ElevatedButton(
-                  child: const Text("Tasdiqlashv"),
+                  child: const Text("Tasdiqlash"),
                   onPressed: () async {
-                    await FirebaseAuthService.verifyOTP(_sentCodeController.text)
+                    await FirebaseAuthService.verifyOTP(
+                            _sentCodeController.text)
                         .then((value) {
                       if (value) {
                         ok(context);
                       } else {
                         Navigator.pushAndRemoveUntil(
                             context,
-                            MaterialPageRoute(builder: (context) => SignUpPage()),
+                            MaterialPageRoute(
+                                builder: (context) => SignUpPage()),
                             (route) => false);
                       }
                     });
@@ -68,8 +67,8 @@ class VerifyPage extends StatelessWidget {
   }
 
   ok(BuildContext context) async {
-    await ok2();
     await FirebaseAuthService.auth.currentUser!.updateDisplayName(disName);
+    await ok2();
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -82,8 +81,7 @@ class VerifyPage extends StatelessWidget {
         .doc(FirebaseAuthService.auth.currentUser!.email ??
             FirebaseAuthService.auth.currentUser!.phoneNumber.toString())
         .set({
-      "displayName": FirebaseAuthService.auth.currentUser!.email ??
-          FirebaseAuthService.auth.currentUser!.phoneNumber,
+      "displayName": FirebaseAuthService.auth.currentUser!.displayName.toString(),
       "profilePic":
           "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg",
       "eEnc": FieldValue.serverTimestamp(),

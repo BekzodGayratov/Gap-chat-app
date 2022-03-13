@@ -2,7 +2,7 @@ import 'package:chatapp/services/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
 
 dec(String from) {
-    if (from == FirebaseAuthService.auth.currentUser!.phoneNumber ||
+    if (from == FirebaseAuthService.auth.currentUser!.displayName ||
         from == FirebaseAuthService.auth.currentUser!.email) {
       return const BorderRadius.only(
           topLeft: Radius.circular(15.0),
@@ -19,7 +19,7 @@ dec(String from) {
   }
 
   color(String from) {
-    if (from == FirebaseAuthService.auth.currentUser!.phoneNumber ||
+    if (from == FirebaseAuthService.auth.currentUser!.displayName ||
         from == FirebaseAuthService.auth.currentUser!.email) {
       return Colors.blue;
     } else {

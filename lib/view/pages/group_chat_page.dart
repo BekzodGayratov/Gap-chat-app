@@ -1,5 +1,3 @@
-import 'package:animate_do/animate_do.dart';
-import 'package:chatapp/functions/show_messages.func.dart';
 import 'package:chatapp/providers/messaging_provider.dart';
 import 'package:chatapp/services/fireStore_service.dart';
 import 'package:chatapp/services/firebase_auth_service.dart';

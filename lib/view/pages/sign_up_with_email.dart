@@ -16,7 +16,11 @@ class SignUpWithEmailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Scaffold(
-        appBar: AppBar(backgroundColor: Colors.transparent,elevation: 0,iconTheme: IconThemeData(color: Colors.black),),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.black),
+        ),
         body: SafeArea(
           child: Column(
             children: [
@@ -60,9 +64,9 @@ class SignUpWithEmailPage extends StatelessWidget {
                   onPressed: () async {
                     await FirebaseAuthService.createEmailAndPassword(
                             _emailController.text, _passwordController.text)
-                        .then((value) {
+                        .then((value) async {
                       if (value) {
-                        ok(context);
+                        await ok(context);
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
@@ -90,9 +94,9 @@ class SignUpWithEmailPage extends StatelessWidget {
   }
 
   ok(BuildContext context) async {
-    await ok2();
     await FirebaseAuthService.auth.currentUser!
         .updateDisplayName(_nameController.text);
+    await ok2();
   }
 
   ok2() async {
@@ -101,8 +105,7 @@ class SignUpWithEmailPage extends StatelessWidget {
         .doc(FirebaseAuthService.auth.currentUser!.email ??
             FirebaseAuthService.auth.currentUser!.phoneNumber.toString())
         .set({
-      "displayName": FirebaseAuthService.auth.currentUser!.email ??
-          FirebaseAuthService.auth.currentUser!.phoneNumber,
+      "displayName": _nameController.text,
       "profilePic":
           "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg",
       "eEnc": FieldValue.serverTimestamp(),
