@@ -16,6 +16,7 @@ class SignUpWithEmailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Scaffold(
+        appBar: AppBar(backgroundColor: Colors.transparent,elevation: 0,iconTheme: IconThemeData(color: Colors.black),),
         body: SafeArea(
           child: Column(
             children: [
@@ -26,7 +27,7 @@ class SignUpWithEmailPage extends StatelessWidget {
                   controller: _nameController,
                   inputDecoration: InputDecoration(
                       hintText: "Abdulloh ibn Muborak",
-                      labelText: "First name",
+                      labelText: "Ismingiz",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0)))),
               SizedBox(
@@ -35,7 +36,7 @@ class SignUpWithEmailPage extends StatelessWidget {
               MyTextFormField(
                   controller: _emailController,
                   inputDecoration: InputDecoration(
-                      labelText: "Email",
+                      labelText: "Email manzil",
                       hintText: "example@gmail.com",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0)))),

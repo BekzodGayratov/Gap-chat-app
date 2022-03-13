@@ -21,7 +21,7 @@ class MyRouter {
       case '/verify':
         return MaterialPageRoute(
             builder: (context) => VerifyPage(
-                  disName: args as String,
+                 disName: args as String,
                 ));
       case '/chatPage':
         return MaterialPageRoute(

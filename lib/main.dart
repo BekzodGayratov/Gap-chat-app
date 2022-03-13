@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/splash',
-      title: "Gap",
       onGenerateRoute: _myRouter.onGenerate,
     );
   }

@@ -1,5 +1,6 @@
 import 'package:chatapp/view/pages/sign_up_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class FirebaseAuthService {
@@ -58,7 +59,11 @@ class FirebaseAuthService {
     } catch (e) {
       return false;
     }
-    ;
+  }
+  static resendCode(String phonNumber){
+    try{
+     }
+    catch(e){}
   }
 
   static logAut(BuildContext context) async {

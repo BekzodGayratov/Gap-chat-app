@@ -43,14 +43,14 @@ class _SignUpPageState extends State<SignUpPage> {
                               controller: _nameController,
                               decoration: InputDecoration(
                                 hintText: "Abdulloh ibn Muborak",
-                                labelText: "First name",
+                                labelText: "Ismingiz",
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                               ),
                               validator: (v) {
                                 if (v!.isEmpty) {
-                                  return "Bo'sh qoldirish mumkin emas";
+                                  return "To'ldirish majburiy";
                                 }
                               },
                             ),
@@ -67,17 +67,16 @@ class _SignUpPageState extends State<SignUpPage> {
                                   child: DropdownButtonHideUnderline(
                                       child: numbersChanger(context)),
                                 ),
-                                labelText: "Phone number",
-                                hintText: "+998916952632",
+                                labelText: "Telefon raqam",
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                               ),
                               validator: (v) {
-                                if (v!.length != 13) {
-                                  return "Please enter valid phone number e.g  +998916952632";
-                                } else if (v.length < 13 || v.length > 13) {
-                                  return "Please check your number";
+                                if (v!.isEmpty) {
+                                  return "To'ldirish majburiy";
+                                } else if (v.length > 9) {
+                                  return "Iltimos yaroqliy raqam kiriting";
                                 }
                               },
                             ),
@@ -91,11 +90,14 @@ class _SignUpPageState extends State<SignUpPage> {
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height * 0.05,
                         child: ElevatedButton(
-                          child: const Text("Sign In"),
+                          child: const Text("Ro'yhatdan o'tish"),
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               await FirebaseAuthService.loginWithPhone(
-                                  _phoneNumberController.text);
+                                  Provider.of<PhoneNumbersProvider>(context,
+                                              listen: false)
+                                          .dropValue +
+                                      _phoneNumberController.text);
                               setState(() {});
                               Navigator.pushNamed(context, '/verify',
                                   arguments: _nameController.text);
@@ -110,7 +112,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height * 0.05,
                         child: ElevatedButton(
-                          child: const Text("Sign Up With Email"),
+                          child: const Text("Account yaratish"),
                           onPressed: () {
                             Navigator.pushNamed(context, '/signUpWithEmail');
                           },
