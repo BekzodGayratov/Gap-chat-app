@@ -1,4 +1,5 @@
 import 'package:chatapp/core/components/tab_bar_comp.dart';
+import 'package:chatapp/services/fireStore_service.dart';
 import 'package:chatapp/view/screens/chats_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -46,6 +47,9 @@ class _HomePageState extends State<HomeScreen> with TickerProviderStateMixin {
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: ""),
         ],
       ),
+      floatingActionButton: FloatingActionButton(onPressed: () async {
+        FireStoreService.getUsers();
+      }),
     );
   }
 }

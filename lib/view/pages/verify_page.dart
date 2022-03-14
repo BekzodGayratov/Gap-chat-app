@@ -80,8 +80,7 @@ class VerifyPage extends StatelessWidget {
   ok2() async {
     await FireStoreService.fireStore
         .collection("users")
-        .doc(FirebaseAuthService.auth.currentUser!.email ??
-            FirebaseAuthService.auth.currentUser!.phoneNumber.toString())
+        .doc(FirebaseAuthService.auth.currentUser!.uid.toString())
         .set({
       "displayName": FirebaseAuthService.auth.currentUser!.displayName.toString(),
       "profilePic": "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png",

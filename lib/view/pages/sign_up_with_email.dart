@@ -103,8 +103,7 @@ class SignUpWithEmailPage extends StatelessWidget {
   ok2() async {
     await FireStoreService.fireStore
         .collection("users")
-        .doc(FirebaseAuthService.auth.currentUser!.email ??
-            FirebaseAuthService.auth.currentUser!.phoneNumber.toString())
+        .doc(FirebaseAuthService.auth.currentUser!.uid.toString())
         .set({
       "displayName": _nameController.text,
       "profilePic": FirebaseAuthService.auth.currentUser!.photoURL,
