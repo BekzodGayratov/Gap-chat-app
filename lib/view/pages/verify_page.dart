@@ -84,7 +84,7 @@ class VerifyPage extends StatelessWidget {
         .set({
       "displayName": FirebaseAuthService.auth.currentUser!.displayName.toString(),
       "profilePic": "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png",
-      "eEnc": FieldValue.serverTimestamp(),
+      "eEnc": FirebaseAuthService.auth.currentUser!.uid.toString(),
     });
   }
 }

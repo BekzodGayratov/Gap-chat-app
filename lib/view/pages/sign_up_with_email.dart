@@ -107,7 +107,7 @@ class SignUpWithEmailPage extends StatelessWidget {
         .set({
       "displayName": _nameController.text,
       "profilePic": FirebaseAuthService.auth.currentUser!.photoURL,
-      "eEnc": FieldValue.serverTimestamp(),
+      "eEnc": FirebaseAuthService.auth.currentUser!.uid.toString(),
     });
   }
 }
