@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:chatapp/services/fireStore_service.dart';
+import 'package:chatapp/services/firebase_auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -51,6 +52,7 @@ class ChatsScreen extends StatelessWidget {
                               subtitle: Text(""),
                             ),
                             onTap: () {
+                              print(snapshot.data!.docs[index].id);
                               Navigator.pushNamed(context, '/chatPage',
                                   arguments: [
                                     (snapshot.data!.docs[index].data()

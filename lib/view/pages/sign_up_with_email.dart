@@ -96,6 +96,7 @@ class SignUpWithEmailPage extends StatelessWidget {
   ok(BuildContext context) async {
     await FirebaseAuthService.auth.currentUser!
         .updateDisplayName(_nameController.text);
+    await FirebaseAuthService.auth.currentUser!.updatePhotoURL("https://source.unsplash.com/random");
     await ok2();
   }
 
@@ -106,8 +107,7 @@ class SignUpWithEmailPage extends StatelessWidget {
             FirebaseAuthService.auth.currentUser!.phoneNumber.toString())
         .set({
       "displayName": _nameController.text,
-      "profilePic":
-          "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg",
+      "profilePic": FirebaseAuthService.auth.currentUser!.photoURL,
       "eEnc": FieldValue.serverTimestamp(),
     });
   }

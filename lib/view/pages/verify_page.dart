@@ -5,6 +5,7 @@ import 'package:chatapp/services/firebase_auth_service.dart';
 import 'package:chatapp/view/pages/sign_up_page.dart';
 import 'package:chatapp/view/screens/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class VerifyPage extends StatelessWidget {
@@ -68,6 +69,7 @@ class VerifyPage extends StatelessWidget {
 
   ok(BuildContext context) async {
     await FirebaseAuthService.auth.currentUser!.updateDisplayName(disName);
+    await FirebaseAuthService.auth.currentUser!.updatePhotoURL("https://source.unsplash.com/random");
     await ok2();
     Navigator.pushAndRemoveUntil(
         context,
@@ -82,8 +84,7 @@ class VerifyPage extends StatelessWidget {
             FirebaseAuthService.auth.currentUser!.phoneNumber.toString())
         .set({
       "displayName": FirebaseAuthService.auth.currentUser!.displayName.toString(),
-      "profilePic":
-          "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg",
+      "profilePic": "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png",
       "eEnc": FieldValue.serverTimestamp(),
     });
   }
