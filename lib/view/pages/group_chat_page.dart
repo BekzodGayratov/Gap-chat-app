@@ -1,6 +1,9 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:chatapp/functions/show_messages.func.dart';
 import 'package:chatapp/providers/messaging_provider.dart';
 import 'package:chatapp/services/fireStore_service.dart';
 import 'package:chatapp/services/firebase_auth_service.dart';
+import 'package:chatapp/widgets/my_messaging_form_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,9 +19,10 @@ class GroupChatPage extends StatelessWidget {
       create: (context) => MessagingProvider(),
       builder: (context, child) {
         return Scaffold(
+          appBar: AppBar(title: const Text("Goup chat")),
           body: StreamBuilder<QuerySnapshot>(
             stream: FireStoreService.fireStore
-                .collection("group")
+                .collection("group/gapGroups/message")
                 .orderBy("created_at")
                 .snapshots(),
             builder: (context, snapshot) {
@@ -37,14 +41,17 @@ class GroupChatPage extends StatelessWidget {
                       horizontal: MediaQuery.of(context).size.width * 0.01),
                   child: ListView.builder(
                     itemBuilder: (_, __) {
-                      return Row(
-                        mainAxisAlignment: data[__]["from"] ==
-                                FirebaseAuthService
-                                    .auth.currentUser!.phoneNumber
-                            ? MainAxisAlignment.end
-                            : MainAxisAlignment.start,
-                        children: [
-                        ],
+                      return FadeInUp(
+                        child: Row(
+                          mainAxisAlignment: data[__]["from"] ==
+                                  FirebaseAuthService.auth.currentUser!.uid
+                                      .toString()
+                              ? MainAxisAlignment.end
+                              : MainAxisAlignment.start,
+                          children: [
+                            showMessages(context, data, data[__].id, __),
+                          ],
+                        ),
                       );
                     },
                     itemCount: data.length,
@@ -55,37 +62,8 @@ class GroupChatPage extends StatelessWidget {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.02),
-            child: TextFormField(
-              controller: _messagingController,
-              decoration: InputDecoration(
-                  hintText: "Xabar yozing...",
-                  suffixIcon: context.watch<MessagingProvider>().isComplete
-                      ? IconButton(
-                          icon: const Icon(Icons.send),
-                          onPressed: () async {
-                            FireStoreService.fireStore
-                                .collection("group")
-                                .doc()
-                                .set({
-                              "from": FirebaseAuthService
-                                      .auth.currentUser!.phoneNumber ??
-                                  FirebaseAuthService
-                                      .auth.currentUser!.phoneNumber,
-                              "message": _messagingController.text,
-                              "created_at": FieldValue.serverTimestamp(),
-                            });
-                            _messagingController.clear();
-                          },
-                        )
-                      : null),
-              onChanged: (v) {
-                context.read<MessagingProvider>().showSendButton(v.toString());
-              },
-            ),
-          ),
+          floatingActionButton:
+              MyMessagingFormField(messagingController: _messagingController),
         );
       },
     );

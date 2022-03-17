@@ -9,10 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ChatPageWidget extends StatelessWidget {
-  final String indexAt;
-  final String path;
-  ChatPageWidget({Key? key, required this.indexAt, required this.path})
-      : super(key: key);
+  ChatPageWidget({Key? key}) : super(key: key);
   final _messageController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -22,8 +19,7 @@ class ChatPageWidget extends StatelessWidget {
         return Scaffold(
           body: StreamBuilder<QuerySnapshot>(
             stream: FireStoreService.fireStore
-                .doc("users/$path")
-                .collection("message")
+                .collection("group").doc("gapGroups").collection("chat")
                 .orderBy("created_at")
                 .snapshots(),
             builder: (context, snapshot) {
@@ -50,7 +46,8 @@ class ChatPageWidget extends StatelessWidget {
                             : MainAxisAlignment.start,
                         children: [
                           FadeInUp(
-                            child: showMessages(context, data, path, __),
+                            child:
+                                showMessages(context, data, "", __),
                           )
                         ],
                       );
@@ -67,7 +64,7 @@ class ChatPageWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 horizontal: MediaQuery.of(context).size.width * 0.02),
             child: MyMessagingFormField(
-                messagingController: _messageController, path: path),
+                messagingController: _messageController),
           ),
         );
       },

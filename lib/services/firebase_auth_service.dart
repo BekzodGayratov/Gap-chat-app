@@ -60,11 +60,7 @@ class FirebaseAuthService {
       return false;
     }
   }
-  static resendCode(String phonNumber){
-    try{
-     }
-    catch(e){}
-  }
+  
 
   static logAut(BuildContext context) async {
     await FirebaseAuthService.auth.currentUser!.delete();

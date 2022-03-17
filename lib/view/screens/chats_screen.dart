@@ -1,15 +1,10 @@
-import 'dart:math';
-
 import 'package:animate_do/animate_do.dart';
 import 'package:chatapp/services/fireStore_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:chatapp/services/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
 
-class ChatsScreen extends StatelessWidget {
-  ChatsScreen({Key? key}) : super(key: key);
-  final CollectionReference privateUsers =
-      FirebaseFirestore.instance.collection("users");
-  List users = [];
+class AllUsersScreen extends StatelessWidget {
+  const AllUsersScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,29 +31,14 @@ class ChatsScreen extends StatelessWidget {
                           itemBuilder: (conte, index) {
                             return FadeInUp(
                               child: Card(
-                                child: InkWell(
-                                  child: ListTile(
-                                    leading: CircleAvatar(
-                                      radius: 25.0,
-                                      backgroundImage: profilePic(index),
-                                    ),
-                                    title: Text(FireStoreService.allUsers
-                                        .toList()[index]["displayName"]),
-                                    subtitle: const Text(""),
+                                child: ListTile(
+                                  leading: CircleAvatar(
+                                    radius: 25.0,
+                                    backgroundImage: profilePic(index),
                                   ),
-                                  onTap: () {
-                                    Navigator.pushNamed(context, '/chatPage',
-                                        arguments: [
-                                          (snapshot.data!.docs[index].data()
-                                                  as Map)["displayName"]
-                                              .toString(),
-                                          snapshot.data!.docs[index].id
-                                              .toString(),
-                                          (snapshot.data!.docs[index].data()
-                                                  as Map)["profilePic"]
-                                              .toString(),
-                                        ]);
-                                  },
+                                  title: Text(FireStoreService.allUsers
+                                      .toList()[index]["displayName"]),
+                                  subtitle: const Text(""),
                                 ),
                               ),
                             );

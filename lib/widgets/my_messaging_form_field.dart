@@ -7,9 +7,8 @@ import 'package:provider/provider.dart';
 
 class MyMessagingFormField extends StatelessWidget {
   final TextEditingController messagingController;
-  final String path;
   const MyMessagingFormField(
-      {Key? key, required this.messagingController,required this.path})
+      {Key? key, required this.messagingController})
       : super(key: key);
 
   @override
@@ -23,11 +22,10 @@ class MyMessagingFormField extends StatelessWidget {
                   icon: const Icon(Icons.send),
                   onPressed: () async {
                     FireStoreService.fireStore
-                        .doc("users/$path")
-                        .collection("message")
+                        .collection("group/gapGroups/message")
                         .doc()
                         .set({
-                      "from": FirebaseAuthService.auth.currentUser!.displayName.toString(),
+                      "from": FirebaseAuthService.auth.currentUser!.uid.toString(),
                       "message": messagingController.text,
                       "created_at": FieldValue.serverTimestamp(),
                     });

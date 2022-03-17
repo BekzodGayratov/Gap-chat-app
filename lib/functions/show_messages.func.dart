@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 showMessages(BuildContext context, List<QueryDocumentSnapshot<Object?>> data,
     String path, int __) {
-  if (data[__]["from"] == FirebaseAuthService.auth.currentUser!.displayName ||
+  if (data[__]["from"] == FirebaseAuthService.auth.currentUser!.uid ||
       data[__]["from"] == FirebaseAuthService.auth.currentUser!.email) {
     return Row(
       children: [

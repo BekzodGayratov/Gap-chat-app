@@ -13,6 +13,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    super.initState();
     Future.delayed(const Duration(seconds: 3)).then((value) {
       ok();
     });
@@ -22,7 +23,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: SvgPicture.asset("assets/gap.svg",color: Colors.amber,),
+        child: SvgPicture.asset(
+          "assets/gap.svg",
+          color: Colors.amber,
+        ),
       ),
     );
   }

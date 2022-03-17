@@ -1,4 +1,4 @@
 List<String> tabs = [
-  "Private",
+  "Users",
   "Groups",
 ];
