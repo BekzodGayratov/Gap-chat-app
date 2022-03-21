@@ -1,5 +1,5 @@
-
 import 'package:chatapp/view/pages/group_chat_page.dart';
+import 'package:chatapp/view/pages/settings_page.dart';
 import 'package:chatapp/view/pages/sign_up_page.dart';
 import 'package:chatapp/view/pages/sign_up_with_email.dart';
 import 'package:chatapp/view/pages/verify_page.dart';
@@ -29,6 +29,8 @@ class MyRouter {
         return MaterialPageRoute(builder: (context) => AllUsersScreen());
       case '/groupChat':
         return MaterialPageRoute(builder: (context) => GroupChatPage());
+      case '/settings':
+        return MaterialPageRoute(builder: (context) => SettingsPage());
     }
     return null;
   }

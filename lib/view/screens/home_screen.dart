@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatapp/core/components/tab_bar_comp.dart';
 import 'package:chatapp/providers/tab_provider.dart';
+import 'package:chatapp/services/firebase_auth_service.dart';
 import 'package:chatapp/view/pages/all_users.dart';
 import 'package:chatapp/view/screens/chats_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +29,31 @@ class _HomePageState extends State<HomeScreen> with TickerProviderStateMixin {
       create: (context) => TabProvider(),
       builder: (context, child) {
         return Scaffold(
+          drawer: Drawer(
+              child: ListView(
+            children: [
+              UserAccountsDrawerHeader(
+                  currentAccountPicture: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(
+                        FirebaseAuthService.auth.currentUser!.photoURL
+                            .toString()),
+                  ),
+                  accountName: Text(FirebaseAuthService
+                      .auth.currentUser!.displayName
+                      .toString()),
+                  accountEmail: Text(
+                      FirebaseAuthService.auth.currentUser!.email.toString())),
+              InkWell(
+                child: ListTile(
+                  leading: Icon(Icons.settings_outlined),
+                  title: Text("Settings"),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/settings');
+                },
+              ),
+            ],
+          )),
           appBar: AppBar(
             toolbarHeight: MediaQuery.of(context).size.height * 0.04,
             title: const Text(
@@ -44,17 +71,6 @@ class _HomePageState extends State<HomeScreen> with TickerProviderStateMixin {
             ),
           ),
           body: _pages[context.watch<TabProvider>().currentIndex],
-          bottomNavigationBar: BottomNavigationBar(
-            unselectedItemColor: Colors.grey,
-            selectedItemColor: Colors.black,
-            currentIndex: 0,
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-              BottomNavigationBarItem(icon: Icon(Icons.search), label: ""),
-              BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ""),
-              BottomNavigationBarItem(icon: Icon(Icons.settings), label: ""),
-            ],
-          ),
         );
       },
     );
