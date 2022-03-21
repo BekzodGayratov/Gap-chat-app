@@ -1,6 +1,16 @@
-# chatapp
+# Gap chat app 
 
-A new Flutter project.
+Via this app, you can chat with logged in users. App is low functional but you can satisfy your most important needs. 
+
+
+![Screenshot_1647895606](https://user-images.githubusercontent.com/95920827/159362532-171d8e98-c53c-498b-8f8d-02f41a939686.png)
+
+![Screenshot_1647895606](https://user-images.githubusercontent.com/95920827/159362579-ce70a7fc-b936-4420-bb19-619bf8ba7785.png)
+
+![Screenshot_1647895658](https://user-images.githubusercontent.com/95920827/159362582-272bdd56-4115-438b-b5f0-e7b16845266e.png)
+
+
+
 
 ## Getting Started
 
