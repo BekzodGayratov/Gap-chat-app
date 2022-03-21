@@ -29,19 +29,14 @@ class _SettingsPageState extends State<SettingsPage> {
       body: Column(
         children: [
           ListTile(
-            leading: Stack(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CircleAvatar(
-                  radius: 25.0,
-                  backgroundColor: Colors.blue,
-                  backgroundImage: CachedNetworkImageProvider(
-                    FirebaseAuthService.auth.currentUser!.photoURL.toString(),
-                  ),
-                ),
+                const Text("Foydalanuvchi ismi: "),
+                Text(
+                    FirebaseAuthService.auth.currentUser!.displayName.toString(),style: TextStyle(fontWeight: FontWeight.w600),),
               ],
             ),
-            title: Text(
-                FirebaseAuthService.auth.currentUser!.displayName.toString()),
             trailing: IconButton(
                 icon: const Icon(Icons.edit),
                 onPressed: () async {
