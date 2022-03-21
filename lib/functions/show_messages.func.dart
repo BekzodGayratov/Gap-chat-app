@@ -12,26 +12,29 @@ showMessages(BuildContext context, List<QueryDocumentSnapshot<Object?>> data,
     return InkWell(
       child: Row(
         children: [
-          Container(
+         Container(
             margin: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(context).size.height * 0.01,
-                horizontal: MediaQuery.of(context).size.width * 0.02),
+           vertical: MediaQuery.of(context).size.height * 0.01,
+           horizontal: MediaQuery.of(context).size.width * 0.02),
             child: Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: MediaQuery.of(context).size.height * 0.01,
-                    horizontal: MediaQuery.of(context).size.height * 0.01),
-                child: Text(
-                  data[__]["message"],
-                  style: const TextStyle(
-                    fontSize: 17.0,
-                    color: Colors.white,
-                  ),
-                )),
+           padding: EdgeInsets.only(
+               top: MediaQuery.of(context).size.height * 0.01,
+               bottom: MediaQuery.of(context).size.height * 0.01,
+               left: MediaQuery.of(context).size.height * 0.01,
+               right: MediaQuery.of(context).size.height * 0.01,
+               ),
+           child: Text(
+             data[__]["message"],
+             style: const TextStyle(
+               fontSize: 17.0,
+               color: Colors.white,
+             ),
+           )),
             decoration: BoxDecoration(
-              color: color(data[__]["from"]),
-              borderRadius: dec(
-                data[__]["from"],
-              ),
+         color: color(data[__]["from"]),
+         borderRadius: dec(
+           data[__]["from"],
+         ),
             ),
           ),
           CircleAvatar(
@@ -47,7 +50,7 @@ showMessages(BuildContext context, List<QueryDocumentSnapshot<Object?>> data,
                   title: const Text("Xabar o'chirilsinmi?"),
                   actions: [
                     ElevatedButton(
-                        child: Text("Orqaga"),
+                        child: const Text("Orqaga"),
                         onPressed: () {
                           Navigator.pop(context);
                         }),
@@ -64,32 +67,40 @@ showMessages(BuildContext context, List<QueryDocumentSnapshot<Object?>> data,
   } else {
     return Row(
       children: [
-        CircleAvatar(
-            radius: 18.0,
-            backgroundImage: CachedNetworkImageProvider(
-                FirebaseAuthService.auth.currentUser!.photoURL.toString())),
-        Container(
-          margin: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.height * 0.008,
-              horizontal: MediaQuery.of(context).size.width * 0.02),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
+        CircleAvatar(backgroundImage: CachedNetworkImageProvider(FirebaseAuthService.auth.currentUser!.photoURL.toString()),),
+        Stack(
+           children: [
+              Container(
+            margin: EdgeInsets.symmetric(
                 vertical: MediaQuery.of(context).size.height * 0.01,
-                horizontal: MediaQuery.of(context).size.height * 0.01),
-            child: Text(
-              data[__]["message"],
-              style: const TextStyle(fontSize: 17.0, color: Colors.white),
-              overflow: TextOverflow.visible,
-              maxLines: 10,
+                horizontal: MediaQuery.of(context).size.width * 0.02),
+            child: Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.02,
+                    bottom: MediaQuery.of(context).size.height * 0.01,
+                    left: MediaQuery.of(context).size.height * 0.01,
+                    right: MediaQuery.of(context).size.height * 0.01,
+                    ),
+                child: Text(
+                  data[__]["message"],
+                  style: const TextStyle(
+                    fontSize: 17.0,
+                    color: Colors.white,
+                  ),
+                )),
+            decoration: BoxDecoration(
+              color: color(data[__]["from"]),
+              borderRadius: dec(
+                data[__]["from"],
+              ),
             ),
           ),
-          decoration: BoxDecoration(
-            color: color(data[__]["from"]),
-            borderRadius: dec(
-              data[__]["from"],
-            ),
-          ),
-        ),
+          Positioned(
+            top: MediaQuery.of(context).size.height *0.015,
+            left: MediaQuery.of(context).size.width *0.035,
+            child: Text(FirebaseAuthService.auth.currentUser!.displayName.toString(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12.0,color: Colors.black87),)),
+           ],
+         ),
       ],
     );
   }

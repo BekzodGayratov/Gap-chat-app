@@ -29,31 +29,33 @@ class _HomePageState extends State<HomeScreen> with TickerProviderStateMixin {
       create: (context) => TabProvider(),
       builder: (context, child) {
         return Scaffold(
-          drawer: Drawer(
-              child: ListView(
-            children: [
-              UserAccountsDrawerHeader(
-                  currentAccountPicture: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(
-                        FirebaseAuthService.auth.currentUser!.photoURL
-                            .toString()),
+          drawer: SafeArea(
+            child: Drawer(
+                child: ListView(
+              children: [
+                UserAccountsDrawerHeader(
+                    currentAccountPicture: CircleAvatar(
+                      backgroundImage: CachedNetworkImageProvider(
+                          FirebaseAuthService.auth.currentUser!.photoURL
+                              .toString()),
+                    ),
+                    accountName: Text(FirebaseAuthService
+                        .auth.currentUser!.displayName
+                        .toString()),
+                    accountEmail: Text(
+                        FirebaseAuthService.auth.currentUser!.email.toString())),
+                InkWell(
+                  child: ListTile(
+                    leading: Icon(Icons.settings_outlined),
+                    title: Text("Settings"),
                   ),
-                  accountName: Text(FirebaseAuthService
-                      .auth.currentUser!.displayName
-                      .toString()),
-                  accountEmail: Text(
-                      FirebaseAuthService.auth.currentUser!.email.toString())),
-              InkWell(
-                child: ListTile(
-                  leading: Icon(Icons.settings_outlined),
-                  title: Text("Settings"),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/settings');
+                  },
                 ),
-                onTap: () {
-                  Navigator.pushNamed(context, '/settings');
-                },
-              ),
-            ],
-          )),
+              ],
+            )),
+          ),
           appBar: AppBar(
             toolbarHeight: MediaQuery.of(context).size.height * 0.04,
             title: const Text(
