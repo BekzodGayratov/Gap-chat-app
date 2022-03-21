@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatapp/functions/show_messages.func.dart';
 import 'package:chatapp/providers/messaging_provider.dart';
 import 'package:chatapp/services/fireStore_service.dart';
@@ -19,7 +20,20 @@ class GroupChatPage extends StatelessWidget {
       create: (context) => MessagingProvider(),
       builder: (context, child) {
         return Scaffold(
-          appBar: AppBar(title: const Text("Goup chat")),
+          appBar: AppBar(
+              title: Row(
+            children: [
+              const CircleAvatar(
+                radius: 23.0,
+                backgroundImage: CachedNetworkImageProvider(
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqCK8D9UZ8B6eanDhvUNFX0FMQwNrfN-d_PpRwL3LA6r4uH0b79Tq9iC5dsWt-6e1ZhXU&usqp=CAU"),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.02,
+              ),
+              const Text("Goup chat")
+            ],
+          )),
           body: StreamBuilder<QuerySnapshot>(
             stream: FireStoreService.fireStore
                 .collection("group/gapGroups/message")
@@ -37,22 +51,31 @@ class GroupChatPage extends StatelessWidget {
               } else {
                 var data = snapshot.data!.docs;
                 return Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.01),
-                  child: ListView.builder(
-                    itemBuilder: (_, __) {
-                      return FadeInUp(
-                        child:Row(
-                          mainAxisAlignment: data[__]["from"]== FirebaseAuthService.auth.currentUser!.uid?MainAxisAlignment.end:MainAxisAlignment.start,
-                          children: [
-                             showMessages(context, data, data[__].id, __)
-                          ],
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.01),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: ListView.builder(
+                            itemBuilder: (_, __) {
+                              return FadeInUp(
+                                child: Row(
+                                  mainAxisAlignment: data[__]["from"] ==
+                                          FirebaseAuthService
+                                              .auth.currentUser!.uid
+                                      ? MainAxisAlignment.end
+                                      : MainAxisAlignment.start,
+                                  children: [
+                                    showMessages(context, data[__]["disName"], data, data[__].id, __)
+                                  ],
+                                ),
+                              );
+                            },
+                            itemCount: data.length,
+                          ),
                         ),
-                      );
-                    },
-                    itemCount: data.length,
-                  ),
-                );
+                      ],
+                    ));
               }
             },
           ),

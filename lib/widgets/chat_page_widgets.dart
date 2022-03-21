@@ -47,7 +47,7 @@ class ChatPageWidget extends StatelessWidget {
                         children: [
                           FadeInUp(
                             child:
-                                showMessages(context, data, "", __),
+                                showMessages(context, data[__]["disName"], data, data[__].id, __),
                           )
                         ],
                       );

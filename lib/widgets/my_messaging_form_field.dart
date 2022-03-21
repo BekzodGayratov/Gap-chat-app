@@ -33,6 +33,7 @@ class MyMessagingFormField extends StatelessWidget {
                           FirebaseAuthService.auth.currentUser!.uid.toString(),
                       "message": messagingController.text,
                       "created_at": FieldValue.serverTimestamp(),
+                      "disName":FirebaseAuthService.auth.currentUser!.displayName,
                     });
                     messagingController.clear();
                   },
