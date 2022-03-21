@@ -42,14 +42,10 @@ class GroupChatPage extends StatelessWidget {
                   child: ListView.builder(
                     itemBuilder: (_, __) {
                       return FadeInUp(
-                        child: Row(
-                          mainAxisAlignment: data[__]["from"] ==
-                                  FirebaseAuthService.auth.currentUser!.uid
-                                      .toString()
-                              ? MainAxisAlignment.end
-                              : MainAxisAlignment.start,
+                        child:Row(
+                          mainAxisAlignment: data[__]["from"]== FirebaseAuthService.auth.currentUser!.uid?MainAxisAlignment.end:MainAxisAlignment.start,
                           children: [
-                            showMessages(context, data, data[__].id, __),
+                             showMessages(context, data, data[__].id, __)
                           ],
                         ),
                       );

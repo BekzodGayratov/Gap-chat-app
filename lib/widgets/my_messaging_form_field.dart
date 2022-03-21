@@ -13,29 +13,32 @@ class MyMessagingFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: messagingController,
-      decoration: InputDecoration(
-          hintText: "Xabar yozing...",
-          suffixIcon: context.watch<MessagingProvider>().isComplete
-              ? IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () async {
-                    FireStoreService.fireStore
-                        .collection("group/gapGroups/message")
-                        .doc()
-                        .set({
-                      "from": FirebaseAuthService.auth.currentUser!.uid.toString(),
-                      "message": messagingController.text,
-                      "created_at": FieldValue.serverTimestamp(),
-                    });
-                    messagingController.clear();
-                  },
-                )
-              : null),
-      onChanged: (v) {
-        context.read<MessagingProvider>().showSendButton(v.toString());
-      },
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width *0.02),
+      child: TextFormField(
+        controller: messagingController,
+        decoration: InputDecoration(
+            hintText: "Xabar yozing...",
+            suffixIcon: context.watch<MessagingProvider>().isComplete
+                ? IconButton(
+                    icon: const Icon(Icons.send),
+                    onPressed: () async {
+                      FireStoreService.fireStore
+                          .collection("group/gapGroups/message")
+                          .doc()
+                          .set({
+                        "from": FirebaseAuthService.auth.currentUser!.uid.toString(),
+                        "message": messagingController.text,
+                        "created_at": FieldValue.serverTimestamp(),
+                      });
+                      messagingController.clear();
+                    },
+                  )
+                : null),
+        onChanged: (v) {
+          context.read<MessagingProvider>().showSendButton(v.toString());
+        },
+      ),
     );
   }
 }

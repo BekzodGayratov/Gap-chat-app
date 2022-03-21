@@ -25,7 +25,7 @@ class FireStoreService {
   }
 
   static removeData(String id) async {
-    await fireStore.doc("group/$id").delete();
+    await fireStore.doc("group/gapGroups/message/$id").delete();
   }
 
   static getUsers() async {
