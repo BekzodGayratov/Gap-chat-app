@@ -11,8 +11,6 @@ Via this app, you can chat with logged in users. App is low functional but you c
 
 
 
-https://user-images.githubusercontent.com/95920827/164607689-9e8b1d57-5cb4-479e-bb19-42c540877f69.mp4
-
 
 
 ## Getting Started
